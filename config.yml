@@ -1,0 +1,23 @@
+template: Hello, %s!
+
+defaultName: Stranger
+
+# Database settings.
+database:
+
+  # the name of your JDBC driver
+#  driverClass: com.mysql.jdbc.Driver
+  driverClass: com.mysql.jdbc.Driver
+
+  # the username
+#  user: dropwizard-test
+  user: root
+
+  # the password
+#  password: 111111
+  password:
+
+  # the JDBC URL
+#  url: jdbc:postgresql://localhost/dropwizard-test
+  url: jdbc:mysql://localhost/hehe?createDatabaseIfNotExist=true&amp;useUnicode=true&amp;characterEncoding=utf-8
+
