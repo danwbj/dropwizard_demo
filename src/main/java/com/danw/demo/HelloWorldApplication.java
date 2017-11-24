@@ -5,6 +5,7 @@ import com.danw.demo.core.User;
 import com.danw.demo.db.UserDAO;
 import com.danw.demo.resource.UserResource;
 import io.dropwizard.Application;
+import io.dropwizard.assets.AssetsBundle;
 import io.dropwizard.db.DataSourceFactory;
 import io.dropwizard.hibernate.HibernateBundle;
 import io.dropwizard.setup.Bootstrap;
@@ -34,6 +35,7 @@ public class HelloWorldApplication extends Application<HelloWorldConfiguration> 
 
     @Override
     public void initialize(Bootstrap<HelloWorldConfiguration> bootstrap) {
+        bootstrap.addBundle(new AssetsBundle("/assets/", "/"));
         bootstrap.addBundle(hibernate);
         /**
          * 清理数据库重构的包装器

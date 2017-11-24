@@ -21,3 +21,18 @@ database:
 #  url: jdbc:postgresql://localhost/dropwizard-test
   url: jdbc:mysql://localhost/hehe?createDatabaseIfNotExist=true&amp;useUnicode=true&amp;characterEncoding=utf-8
 
+server:
+  rootPath: /api/
+#  softNofileLimit: 1000
+#  hardNofileLimit: 1000
+  applicationConnectors:
+    - type: http
+      port: 8080
+    #this requires the alpn-boot library on the JVM's boot classpath
+    #- type: h2
+    #  port: 8445
+    #  keyStorePath: example.keystore
+    #  keyStorePassword: example
+  adminConnectors:
+    - type: http
+      port: 8081
