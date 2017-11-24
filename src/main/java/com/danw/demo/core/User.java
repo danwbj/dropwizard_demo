@@ -9,8 +9,13 @@ import javax.persistence.*;
                 @NamedQuery(
                         name = "com.danw.demo.core.User.findAll",
                         query = "SELECT p FROM User p"
+                ),
+                @NamedQuery(
+                        name = "com.danw.demo.core.User.findOne",
+                        query = "SELECT  u FROM User u where id = 1"
                 )
         }
+
 )
 public class User {
     @Id

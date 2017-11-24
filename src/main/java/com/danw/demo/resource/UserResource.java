@@ -3,6 +3,8 @@ package com.danw.demo.resource;
 import com.danw.demo.core.User;
 import com.danw.demo.db.UserDAO;
 import io.dropwizard.hibernate.UnitOfWork;
+import io.dropwizard.jersey.params.LongParam;
+
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import java.util.List;
@@ -16,13 +18,12 @@ public class UserResource {
         this.userDAO = userDAO;
     }
 
-
-//    @GET
-//    @UnitOfWork
-//    public User getPerson(@PathParam("userId") LongParam userId) {
-////        return userDAO.findById(userId.get()).orElseThrow(() -> new NotFoundException("No such user."));
-//        return userDAO.findById(userId.get());
-//    }
+    @Path("/{userId}")
+    @GET
+    @UnitOfWork
+    public User getUser(@PathParam("userId") LongParam userId) {
+        return userDAO.findById(userId.get()).orElseThrow(() -> new NotFoundException("No such user."));
+    }
 
     @POST
     @UnitOfWork
@@ -34,6 +35,13 @@ public class UserResource {
     @UnitOfWork
     public List<User> getAllUser(){
         return userDAO.findAll();
+    }
+
+    @Path("/{userId}")
+    @DELETE
+    @UnitOfWork
+    public boolean deleteUser(@PathParam("userId") LongParam userId){
+        return userDAO.deleteById(userId.get());
     }
 
 
