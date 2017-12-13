@@ -34,8 +34,4 @@ public abstract class UserDAO {
         delete(userId);
         insert(user);
     }
-
-    @SqlQuery("select * from t_user where group_id = :group_id")
-    @MapResultAsBean
-    public abstract List<User> findUsersByGroup(@Bind("group_id") Long group_id);
 }
