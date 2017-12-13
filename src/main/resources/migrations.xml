@@ -15,6 +15,28 @@
                 <constraints nullable="false"/>
             </column>
             <column name="age" type="varchar(255)"/>
+            <column name="group_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
         </createTable>
+
+        <createTable tableName="t_group">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="name" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        <addForeignKeyConstraint baseColumnNames="group_id"
+                                 baseTableName="t_user"
+                                 constraintName="fk_user_group"
+                                 deferrable="true"
+                                 initiallyDeferred="true"
+                                 onDelete="CASCADE"
+                                 onUpdate="RESTRICT"
+                                 referencedColumnNames="id"
+                                 referencedTableName="t_group"/>
+
     </changeSet>
 </databaseChangeLog>

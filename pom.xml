@@ -40,10 +40,15 @@
       <groupId>io.dropwizard</groupId>
       <artifactId>dropwizard-core</artifactId>
     </dependency>
-    <dependency>
+<!--    <dependency>
       <groupId>io.dropwizard</groupId>
       <artifactId>dropwizard-hibernate</artifactId>
+    </dependency>-->
+    <dependency>
+      <groupId>io.dropwizard</groupId>
+      <artifactId>dropwizard-jdbi</artifactId>
     </dependency>
+
     <dependency>
       <groupId>io.dropwizard</groupId>
       <artifactId>dropwizard-assets</artifactId>
@@ -53,10 +58,11 @@
       <artifactId>dropwizard-migrations</artifactId>
     </dependency>
     <dependency>
-      <groupId>mysql</groupId>
-      <artifactId>mysql-connector-java</artifactId>
-      <version>5.0.5</version>
+      <groupId>postgresql</groupId>
+      <artifactId>postgresql</artifactId>
+      <version>	9.1-901-1.jdbc4</version>
     </dependency>
+
   </dependencies>
 
   <build>

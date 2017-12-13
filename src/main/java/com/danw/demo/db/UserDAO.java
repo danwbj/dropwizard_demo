@@ -1,41 +1,34 @@
 package com.danw.demo.db;
 
 import com.danw.demo.core.User;
-import io.dropwizard.hibernate.AbstractDAO;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
+import com.danw.demo.core.UserG;
+import org.skife.jdbi.v2.sqlobject.Bind;
+import org.skife.jdbi.v2.sqlobject.BindBean;
+import org.skife.jdbi.v2.sqlobject.SqlQuery;
+import org.skife.jdbi.v2.sqlobject.SqlUpdate;
+import org.skife.jdbi.v2.sqlobject.helpers.MapResultAsBean;
 
 import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
 
-public class UserDAO extends AbstractDAO<User> {
-    public UserDAO(SessionFactory factory) {
-        super(factory);
-    }
+public interface UserDAO {
+    @SqlUpdate("create table t_user (id serial primary key, name varchar(100),age varchar(100))")
+    void createSomethingTable();
 
-    public Optional<User> findById(Long id) {
-        return Optional.ofNullable(get(id));
-    }
+    @SqlUpdate("insert into t_user (name,age,group_id) values (:name, :age, :group_id)")
+    void insert(@BindBean User user);
 
-    public User create(User user) {
-        User u = persist(user);
-        return u;
-    }
+    @SqlUpdate("update t_user set name = :name,age = :age,group_id = :group_id where id = :userId")
+    void update(@Bind("userId") Long userId,@BindBean User user);
 
-    public List<User> findAll() {
-        return list(namedQuery("com.danw.demo.core.User.findAll"));
-    }
+    @SqlQuery("select u.id,u.name,u.age,u.group_id,p.name as group_name from t_user u left join t_group p on u.group_id = p.id where u.id = :id ")
+    @MapResultAsBean
+    UserG findUserById(@Bind("id") Long id);
 
-    public boolean deleteById(Long id){
-        try{
-            Session session = this.currentSession();
-            session.delete(Objects.requireNonNull(get(id)));
-            return true;
-        }catch(Exception e){
-            return false;
-        }
-    }
+    @SqlQuery("select u.id,u.name,u.age,u.group_id,p.name as group_name from t_user u left join t_group p on u.group_id = p.id")
+    @MapResultAsBean
+    List<UserG> listUsers();
 
+    @SqlUpdate("delete from t_user where id = :userId")
+    void delete(@Bind("userId") Long userId);
 
 }

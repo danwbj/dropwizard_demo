@@ -1,9 +1,8 @@
 package com.danw.demo.resource;
 
 import com.danw.demo.core.User;
+import com.danw.demo.core.UserG;
 import com.danw.demo.db.UserDAO;
-import io.dropwizard.hibernate.UnitOfWork;
-import io.dropwizard.jersey.params.LongParam;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -18,32 +17,62 @@ public class UserResource {
         this.userDAO = userDAO;
     }
 
-    @Path("/{userId}")
+    @Path("/createTable")
     @GET
-    @UnitOfWork
-    public User getUser(@PathParam("userId") LongParam userId) {
-        return userDAO.findById(userId.get()).orElseThrow(() -> new NotFoundException("No such user."));
+    public Boolean  createTable(){
+        try{
+            userDAO.createSomethingTable();
+            return true;
+        }catch(Exception e){
+            return false;
+        }
+    }
+
+    @GET
+    public List<UserG> getAllUser(){
+        return userDAO.listUsers();
     }
 
     @POST
-    @UnitOfWork
-    public User createUser(User user){
-        return userDAO.create(user);
+    public Boolean createUser(User user){
+        try{
+            userDAO.insert(user);
+            return true;
+        }
+        catch(Exception e){
+            return false;
+        }
     }
 
+
+    @Path("/{userId}")
+    @PUT
+    public Boolean updateUser(@PathParam("userId") Long userId,User user){
+        try{
+            userDAO.update(userId,user);
+            return true;
+        }
+        catch(Exception e){
+            System.out.println(e);
+            return false;
+        }
+    }
+
+    @Path("/{userId}")
     @GET
-    @UnitOfWork
-    public List<User> getAllUser(){
-        return userDAO.findAll();
+    public UserG getUser(@PathParam("userId") Long userId) {
+        return userDAO.findUserById(userId);
     }
 
     @Path("/{userId}")
     @DELETE
-    @UnitOfWork
-    public boolean deleteUser(@PathParam("userId") LongParam userId){
-        return userDAO.deleteById(userId.get());
+    public Boolean deleteUser(@PathParam("userId") Long userId){
+        try{
+            userDAO.delete(userId);
+            return true;
+        }catch (Exception e){
+            return false;
+        }
     }
-
-
 
 }
