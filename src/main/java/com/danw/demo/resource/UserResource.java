@@ -75,4 +75,11 @@ public class UserResource {
         }
     }
 
+    @Path("/{userId}")
+    @POST
+    public Boolean d_c(@PathParam("userId") Long userId,User user){
+        userDAO.d_c(userId,user);
+        return true;
+    }
+
 }
