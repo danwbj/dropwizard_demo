@@ -6,6 +6,7 @@ import org.skife.jdbi.v2.sqlobject.*;
 import org.skife.jdbi.v2.sqlobject.helpers.MapResultAsBean;
 
 import java.util.List;
+import java.util.Map;
 
 public abstract class UserDAO {
 

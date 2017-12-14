@@ -7,6 +7,7 @@ import com.danw.demo.db.UserDAO;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import java.util.List;
+import java.util.Map;
 
 @Path("/user")
 @Produces(MediaType.APPLICATION_JSON)

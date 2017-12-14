@@ -1,7 +1,6 @@
 package com.danw.demo.resource;
 
 import com.danw.demo.core.Group;
-import com.danw.demo.core.GroupU;
 import com.danw.demo.db.GroupDAO;
 
 import javax.ws.rs.GET;

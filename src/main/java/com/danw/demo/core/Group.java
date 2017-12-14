@@ -1,9 +1,27 @@
 package com.danw.demo.core;
 
 
+import java.util.List;
+import java.util.Set;
+
 public class Group {
     private long id;
     private String name;
+    private List<User> users;
+
+    public List<User> getUsers() {
+        return users;
+    }
+
+    public void setUsers(List<User> users) {
+        this.users = users;
+    }
+
+    public Group(long id, String name, List<User> users) {
+        this.id = id;
+        this.name = name;
+        this.users = users;
+    }
 
     public Group() {
     }
